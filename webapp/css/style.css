@@ -1,0 +1,67 @@
+/* Enter your custom styles here */
+
+.titleBgColor {
+    background-color: azure !important;
+}
+
+.objHeight {
+    height: 500px;
+}
+
+.green {
+    background-color: #66FF33;
+}
+
+.red {
+    background-color: #FF3300;
+}
+
+.yellow {
+    background-color: #FFFF66;
+}
+.greenBackground {
+  background-color: #80b877 !important;
+}
+.grayBackground {
+  background-color: #d5dadc !important;
+}
+.sapMListTblSubCnt {
+	display: flex;
+	flex-wrap:wrap;
+}
+.sapMListTblSubCntRow{
+	width: 50%;
+	/*margin-top: 0 rem;*/
+	
+}
+.sapMListTblSubCntRow + .sapMListTblSubCntRow {
+    margin-top: .0rem;
+}
+.sapMInputBase {
+    height: 1.8rem;
+    background: transparent;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+.sapMInputBaseInner {
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #5499C7;
+    -webkit-appearance: none;
+    border-radius: 1;
+    vertical-align: top;
+    margin: 0.2;
+    -moz-appearance: textfield;
+    font-size: 0.875rem;
+    font-family: "72-Web",Arial,Helvetica,sans-serif;
+    line-height: normal;
+    height: 1.8rem;
+    padding: 0 0 rem;
+}
+.sapUiSizeCompact .sapMInputBase {
+    height: 1.8rem;
+}
+.sapUiSizeCompact .sapMInputBaseWidthPadding {
+    padding: 0rem 0;
+}

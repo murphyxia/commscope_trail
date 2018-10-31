@@ -1,0 +1,59 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.commscope.grbypo.controller.matDoc"
+	xmlns:sf="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page enableScrolling="false" showHeader="false">
+				<subHeader sticky="HdToolbar">
+					<Toolbar id="HdToolbar">
+						<Button id="hideBt" press="hideMdc"></Button>
+						<Button text="+" press="zoomadd"></Button>
+						<Button text="-" press="zoomqian"></Button>
+						<ToolbarSpacer>
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px"/>
+							</layoutData>
+						</ToolbarSpacer>
+						<!--<Button icon="sap-icon://bullet-text" type="Transparent" press="onUserNamePress">-->
+						<!--	<layoutData>-->
+						<!--		<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+						<!--	</layoutData>-->
+						<!--</Button>-->
+						<MenuButton icon="sap-icon://add-activity" type="Transparent">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+							<menu>
+								<Menu itemSelected="onMenuAction">
+									<items>
+										<MenuItem text="Email" icon="sap-icon://email"/>
+										<MenuItem text="Print" icon="sap-icon://print"/>
+									</items>
+								</Menu>
+							</menu>
+						</MenuButton>
+					</Toolbar>
+				</subHeader>
+				<!--<ObjectHeader>-->
+				<!--	<attributes>-->
+				<!--		<ObjectAttribute text="Material Document: {opdf>/MaterialDoc}" />-->
+				<!--		<ObjectAttribute text="Purchase Order: {opdf>/PoNum}"/>-->
+				<!--		<ObjectAttribute text="PO Item: {opdf>/PoItem}"/>-->
+				<!--	</attributes>-->
+				<!--</ObjectHeader>-->
+				<sf:SimpleForm id="MatdocInfo" editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+					singleContainerFullSize="false">
+					<Text text="Material Document: {opdf>/MaterialDoc}"/>
+					<Text text="Purchase Order: {opdf>/PoNum}"/>
+					<Text text="PO Item: {opdf>/PoItem}"/>
+				</sf:SimpleForm>
+				<html:div>
+					<!--<html:iframe id="iframe" width="100%"  click="test" frameborder="0"/>-->
+					<html:canvas id="the-canvas" width="100%"/>
+				</html:div>
+				<!--<core:HTML id="pdf"/>-->
+				<!--<Panel width="auto" class="sapUiResponsiveMargin" id="pdf" />-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

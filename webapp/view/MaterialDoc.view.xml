@@ -1,0 +1,191 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt"
+	xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:sf="sap.ui.layout.form"
+	controllerName="com.commscope.grbypo.controller.MaterialDoc" displayBlock="true">
+	<App>
+		<pages>
+			<Page title="{i18n>title}" showHeader="false">
+				<subHeader sticky="HdToolbar">
+					<Toolbar id="HdToolbar">
+						<!--<tnt:ToolHeader >-->
+						<MenuButton icon="sap-icon://menu2" type="Transparent">
+							<!--<layoutData>-->
+							<!--	<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+							<!--</layoutData>-->
+							<menu>
+								<Menu itemSelected="onMenuAction" id="menuSel">
+									<items>
+										<MenuItem text="PO number" icon="{scanMode>/PO}"/>
+										<MenuItem text="ASN number" icon="{scanMode>/ASN}"/>
+										<MenuItem text="Material number" icon="{scanMode>/MATID}"/>
+									</items>
+								</Menu>
+							</menu>
+							<!--<layoutData>-->
+							<!--	<OverflowToolbarLayoutData priority="low"/>-->
+							<!--</layoutData>-->
+						</MenuButton>
+						<!--<ToolbarSpacer width="20px"/>-->
+						<ToolbarSpacer/>
+						<SearchField id="asnSearchField" search="onSearch" placeholder="{scanMode>/PLCHOLDER}" enableSuggestions="false" suggest="onSuggest"
+							suggestionItems="{ path: 'poItemData>/'}">
+							<!--<layoutData>-->
+							<!--	<OverflowToolbarLayoutData maxWidth="300px" priority="NeverOverflow"/>-->
+							<!--</layoutData>-->
+							<suggestionItems>
+								<SuggestionItem text="{poItemData>MaterialNumber}" description="{poItemData>MaterialDescription}" key="{poItemData>MaterialDescription}"/>
+							</suggestionItems>
+						</SearchField>
+						<ToolbarSeparator/>
+						<Button press="handelCamera" icon="sap-icon://bar-code">
+							<!--<layoutData>-->
+							<!--	<OverflowToolbarLayoutData priority="low"/>-->
+							<!--</layoutData>-->
+						</Button>
+						<!--</tnt:ToolHeader>-->
+					</Toolbar>
+				</subHeader>
+				<!--<Panel >-->
+				<!--	<Toolbar >-->
+				<!--<tnt:ToolHeader >-->
+				<!--<ToolbarSpacer width="20px"/>-->
+				<!--		<ToolbarSpacer width="5%"/>-->
+				<!--		<SearchField width="90%" id="asnSearchField" search="onSearch" placeholder="{scanMode>/PLCHOLDER}" enableSuggestions="false" suggest="onSuggest"-->
+				<!--			suggestionItems="{ path: 'poItemData>/'}"  maxLength="10">-->
+				<!--<layoutData>-->
+				<!--	<OverflowToolbarLayoutData maxWidth="300px" priority="NeverOverflow"/>-->
+				<!--</layoutData>-->
+				<!--			<suggestionItems>-->
+				<!--				<SuggestionItem text="{poItemData>MaterialNumber}" description="{poItemData>MaterialDescription}" key="{poItemData>MaterialDescription}"/>-->
+				<!--			</suggestionItems>-->
+				<!--		</SearchField>-->
+				<!--		<Button press="handelCamera" icon="sap-icon://bar-code">-->
+				<!--<layoutData>-->
+				<!--	<OverflowToolbarLayoutData priority="low"/>-->
+				<!--</layoutData>-->
+				<!--		</Button>-->
+				<!--</tnt:ToolHeader>-->
+				<!--	</Toolbar>-->
+				<content>
+					<!--<Panel id="vendorInfo">-->
+					<!--<ObjectHeader title="{vendorMode>/VendorId} " showTitleSelector="true" titleSelectorPress="hideVendor">-->
+					<!--	<attributes>-->
+					<!--		<ObjectAttribute text="{vendorMode>/VendorDesc}"></ObjectAttribute>-->
+					<!--	</attributes>-->
+					<!--	<statuses>-->
+					<!--		<ObjectStatus text="Some Damaged" state="Error"/>-->
+					<!--	</statuses>-->
+					<!--</ObjectHeader>-->
+					<sf:SimpleForm id="vendorInfo" editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+						singleContainerFullSize="false">
+						<Link text="Hide" press="hideVendor" emphasized="true"/>
+						<Text id="nameText" text=" {vendorMode>/VendorId}: {vendorMode>/VendorDesc} "/>
+						<RatingIndicator value="{vendorMode>/VendorScore}" displayOnly="true"/>
+					</sf:SimpleForm>
+					<!--</Panel>-->
+					<!--<Panel id="vendorInfo2">-->
+					<!--<l:VerticalLayout>-->
+					<!--<Button press="hideVendor" text=">"/>-->
+					<!--	<Label text="{vendorMode>/VendorDesc}" labelFor="RI_default"/>-->
+					<!--	<RatingIndicator enabled="false" id="RI_default" maxValue="5" class="sapUiSmallMarginBottom" value="{vendorMode>/VendorScore}"-->
+					<!--		tooltip="Rating Tooltip"/>-->
+					<!--</l:VerticalLayout>-->
+					<!--</Panel>-->
+					<PullToRefresh id="pullToRefresh" refresh="handleRefresh" description="Release to Display Vendor info" visible="false"/>
+					<Table id="poItemTable" mode="MultiSelect" inset="false"
+						items="{ path: 'poItemData>/', sorter: [{ path: 'PoNumber' },{path: 'PoItemNumber'}] }" selectionChange="onSelectedChg"
+						alternateRowColors="true">
+						<!--<headerToolbar>-->
+						<!--<OverflowToolbar id="otbSubheader">-->
+						<!--	<Toolbar>-->
+						<!--		<MenuButton icon="sap-icon://menu2" type="Transparent">-->
+						<!--			<layoutData>-->
+						<!--				<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+						<!--			</layoutData>-->
+						<!--			<menu>-->
+						<!--				<Menu itemSelected="onMenuAction" id="menuSel2">-->
+						<!--					<items>-->
+						<!--						<MenuItem text="PO number" icon="{scanMode>/PO}"/>-->
+						<!--						<MenuItem text="ASN number" icon="{scanMode>/ASN}"/>-->
+						<!--						<MenuItem text="Material number" icon="{scanMode>/MATID}"/>-->
+						<!--					</items>-->
+						<!--				</Menu>-->
+						<!--			</menu>-->
+						<!--		</MenuButton>-->
+						<!--		<ToolbarSpacer/>-->
+						<!--		<SearchField id="asnSearchField2" width="100%" search="onSearch" placeholder="{scanMode>/PLCHOLDER}"/>-->
+						<!--		<Button press="handelCamera" icon="sap-icon://bar-code"/>-->
+						<!--		<ToolbarSeparator/>-->
+						<!--	</Toolbar>-->
+						<!--</OverflowToolbar>-->
+						<!--<Toolbar>-->
+						<!--	<Label text="text"></Label>-->
+						<!--</Toolbar>-->
+						<!--vendor info below-->
+						<!--</headerToolbar>-->
+						<columns>
+							<Column minScreenWidth="Small" demandPopin="true">
+								<Text text="PO / Item"/>
+							</Column>
+							<!--<Column minScreenWidth="Tablet" demandPopin="true">-->
+							<!--	<Text text="PO Item"/>-->
+							<!--</Column>-->
+							<!--<Column  demandPopin="true" hAlign="End">-->
+							<Column >
+								<Text text="Material"/>
+							</Column>
+							<Column >
+								<Text text="S.Loc"/>
+							</Column>
+							<!--<Column  demandPopin="true" hAlign="Right">-->
+							<Column >
+								<Text text="ToBeRec Qty"/>
+							</Column>
+							<Column >
+								<Text text="Open Qty"/>
+							</Column>
+							<Column minScreenWidth="Small" demandPopin="true">
+								<Text text="Actual Rec.Qty"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Status"/>
+							</Column>
+						</columns>
+						<items>
+							<!--<ColumnListItem type="{poItemData>NaviType}">-->
+							<!--<ColumnListItem type="Navigation">-->
+							<ColumnListItem press="onPress">
+								<cells>
+									<Text text="{poItemData>PoNumber} /{=parseFloat(${poItemData>PoItemNumber})}"/>
+									<!--<Text text="{poItemData>PoItemNumber}"/>-->
+									<!--<ObjectIdentifier title="{poItemData>MaterialNumber}" text="{poItemData>MaterialDescription}"/>-->
+									<ObjectIdentifier title="{poItemData>MaterialNumber}"/>
+									<ObjectIdentifier title="{poItemData>StorageLocation}"/>
+									<ObjectIdentifier
+										title="{path: 'poItemData>ReceivedQuantity', type: 'sap.ui.model.type.Float', formatOptions: { minFractionDigits: 0, maxFractionDigits: 0 } }"/>
+									<ObjectIdentifier
+										title="{path: 'poItemData>PoOpenQuantity', type: 'sap.ui.model.type.Float', formatOptions: { minFractionDigits: 0, maxFractionDigits: 0 } }"/>
+									<Input id="actQty"
+										value="{path: 'poItemData>ActualRecQty', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, roundingMode: 'away_from_zero'}}"
+										type="Number" change="onChange" width="90px" editable="true"/>
+									<ObjectStatus text="{poItemData>StatusText}" state="{poItemData>StatusState}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<OverflowToolbar id="otbFooter">
+						<Button id="messagePopover" icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized" press="handleMessagePopoverPress"/>
+						<ToolbarSpacer/>
+						<Label id="selectCnt" text="{cnt>/poSelected} / "/>
+						<Label id="totalCnt" text="{cnt>/poItemTotal}"/>
+						<ToolbarSpacer/>
+						<Button text="Clear" type="Reject" press="onClear" id="clearButton" visible="true"/>
+						<Button text="Post GR" type="Accept" press="onPostGR" id="postGRButton"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

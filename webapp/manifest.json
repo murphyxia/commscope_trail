@@ -1,0 +1,142 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "com.commscope.grbypo",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZGW_DEMO_GRFORPO_SRV": {
+				"uri": "/sap/opu/odata/sap/ZGW_DEMO_GRFORPO_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.commscope.grbypo.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.commscope.grbypo.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "ZGW_DEMO_GRFORPO_SRV",
+				"settings": {
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			}
+		},
+		"resources": {
+			"js": [
+				{
+					"uri": "js/pdf.js"
+				},
+				{
+					"uri": "js/pdf.worker.js"
+				},
+				{
+					"uri": "js/touch-0.2.14.min.js"
+				}
+			],
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"routes": [
+				{
+					"name": "",
+					"pattern": "",
+					"target": "home"
+				},
+				{
+					"name": "matdoc",
+					"pattern": "mat/{PONumber}/{POItem}/{MaterialDoc}",
+					"target": "details"
+				}
+			],
+			"targets": {
+				"details": {
+					"viewName": "matDoc",
+					"viewId": "matdoc",
+					"viewLevel": 2
+				},
+				"home": {
+					"viewName": "MaterialDoc",
+					"viewId": "home",
+					"viewLevel": 1
+				}
+			},
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.commscope.grbypo.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"async": true
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zwm_grbypo/webapp",
+		"_version": "1.1.0"
+	}
+}
